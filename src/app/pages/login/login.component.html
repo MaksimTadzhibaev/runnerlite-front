@@ -5,7 +5,7 @@
             <div class="form-row">
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>e-mail</mat-label>
-                    <input matInput placeholder="pat@example.com"
+                    <input matInput placeholder="pat@example.com" tabindex="0"
                         formControlName="email" required>
                     <mat-error *ngIf="isControlInvalid('email')">Введите e-mail</mat-error>
                 </mat-form-field>
@@ -13,19 +13,19 @@
             <div class="form-row">
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>пароль</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'"
+                    <input matInput [type]="hide ? 'password' : 'text'" tabindex="0"
                         formControlName="password">
-                    <button mat-icon-button matSuffix (click)="hide= !hide"
+                    <span mat-icon-button matSuffix (click)="hide= !hide"
                         [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
+                    </span>
                     <mat-error *ngIf="isControlInvalid('password')">Введите
                         пароль</mat-error>
                 </mat-form-field>
             </div>
             <div class="form-buttons row jcsb">
-                <button type="submit" mat-stroked-button color="primary">Войти</button>
+                <button type="submit" mat-stroked-button color="primary" tabindex="0">Войти</button>
                 <a mat-stroked-button target="_blank" routerLink="/signup">Регистрация</a>
             </div>
             <div class="form-font invalid" *ngIf="isError"

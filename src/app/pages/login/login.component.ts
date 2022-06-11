@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import {Title} from "@angular/platform-browser";
 import { Router } from '@angular/router';
-import { Credentials } from 'src/app/model/credentials';
+import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 
 export const LOGIN_URL = 'login';
@@ -55,14 +55,11 @@ export class LoginComponent implements OnInit {
         .forEach(cn => controls[cn].markAsTouched());
         return;
     }    
-    this.auth.authenticate(new Credentials(this.loginForm.value.email, this.loginForm.value.password))
+    this.auth.authenticate(this.loginForm.value.email, this.loginForm.value.password)
+    .pipe(first())
     .subscribe(authResult => {
       this.isError = false;
-      if (authResult.redirectUrl) {
-        this.router.navigateByUrl(authResult.redirectUrl);
-      } else {
-        this.router.navigateByUrl('/');
-      }
+      this.router.navigateByUrl('/');      
     }, error => {
       this.isError = true;      
       console.log(error);

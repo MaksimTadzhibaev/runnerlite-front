@@ -1,18 +1,18 @@
-<mat-expansion-panel expanded="true">
+<mat-expansion-panel expanded="true" *ngIf="volunteerList.length" class="abmb">
     <mat-expansion-panel-header>
         <mat-panel-title>
             Волонтёры команды
         </mat-panel-title>
     </mat-expansion-panel-header>
     <p>{{currentRun}}</p>
-    <table mat-table [dataSource]="volunteerList" class="mat-elevation-z8">
+    <table mat-table [dataSource]="volunteerList" class="mat-elevation-z8 table-volunteer">
         <ng-container matColumnDef="positionName">
             <th mat-header-cell *matHeaderCellDef>Позиция</th>
-            <td mat-cell *matCellDef="let element">{{element.positionName}}</td>
+            <td mat-cell *matCellDef="let element" class="position-td">{{element.positionName}}</td>
         </ng-container>
         <ng-container matColumnDef="positionRequired">
             <th mat-header-cell *matHeaderCellDef>Требуется</th>
-            <td mat-cell *matCellDef="let element">{{element.positionRequired}}</td>
+            <td mat-cell *matCellDef="let element" class="center-td">{{element.positionRequired}}</td>
         </ng-container>
         <ng-container matColumnDef="fullNameVolunteer">
             <th mat-header-cell *matHeaderCellDef>Волонтёр</th>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { UserNameDto } from 'src/app/model/username-dto';
 
 @Component({
   selector: 'app-user-info',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
+
+  @Input() source: UserNameDto;
 
   constructor() { }
 

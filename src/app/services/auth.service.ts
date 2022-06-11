@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AuthResult } from '../model/auth-result';
-import { Credentials } from '../model/credentials';
+import { Role } from '../model/role';
 import { SignupDto } from '../model/signup-dto';
+import { User } from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,30 +13,35 @@ export class AuthService {
 
   private readonly storageFieldName = 'current_user';
 
-  private _currentUser?: Credentials;
+  private currentUserSubject: BehaviorSubject<User>;
 
-  public redirectUrl?: string; 
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+}
 
+  public currentUser: Observable<User>;  
+  
   constructor(private http: HttpClient) {
-    let data = localStorage.getItem(this.storageFieldName);
-    if (data) {
-      this._currentUser = JSON.parse(data);
-    }
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(this.storageFieldName)));
+    this.currentUser = this.currentUserSubject.asObservable();    
   }
-
+  
   public isAuthenticated(): boolean {
-    return !!this._currentUser;
+    return !!this.currentUserSubject.value
+  }
+  
+  public hasRole(role: Role): boolean {
+    return this.currentUserSubject.value.authorities.some(c => c.authority.valueOf() === role.valueOf());
   }
 
-  authenticate(credentials: Credentials) : Observable<AuthResult> {
-    const headers = new HttpHeaders(credentials ? { authorization: 'Basic ' + btoa(credentials.username + ':' + credentials.password) } : {});
-    return this.http.get<AuthResult>('/api/v1/login', {headers: headers})
-    .pipe(
-      map(resp => {
-        if ('username' in resp) {
-          this._currentUser = resp as unknown as Credentials;
+  authenticate(username: string, password: string) : Observable<any> {
+    const headers = new HttpHeaders({ authorization: 'Basic ' + btoa(username + ':' + password) });
+    return this.http.get<any>('/api/v1/login', {headers: headers})
+    .pipe(map(resp => {
+        if ('username' in resp) {      
           localStorage.setItem(this.storageFieldName, JSON.stringify(resp));
-          return new AuthResult(this._currentUser, this.redirectUrl);
+          this.currentUserSubject.next(resp);
+          return resp;
         }
         throw new Error('Authentication error');
       })
@@ -44,11 +49,9 @@ export class AuthService {
   }
 
   logout() {
-    if (this.isAuthenticated()) {
-      this._currentUser = undefined;
-      localStorage.removeItem(this.storageFieldName);
-      this.http.post('/api/v1/logout', {}).subscribe();
-    }
+    localStorage.removeItem(this.storageFieldName);
+    this.currentUserSubject.next(null);
+    this.http.post('/api/v1/logout', {}).subscribe();    
   }
 
   signUp(signupDto: SignupDto) : Observable<number> {

@@ -31,7 +31,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 //import { CustomDateAdapter } from './helpers/custom.data.adapter';
 import { CabinetRunnerComponent } from './pages/cabinet-runner/cabinet-runner.component';
 
@@ -42,6 +42,11 @@ import { SubscriptionsListComponent } from './components/subscriptions-list/subs
 import { PlanRunComponent } from './components/plan-run/plan-run.component';
 import { PlanVolunteerComponent } from './components/plan-volunteer/plan-volunteer.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { ErrorInterceptor } from './helpers/error.interceptor';
+import { CabinetAdminComponent } from './pages/cabinet-admin/cabinet-admin.component';
+import { TeamInfoComponent } from './components/team-info/team-info.component';
+import { TeamsVolunteerPlanningComponent } from './components/teams-volunteer-planning/teams-volunteer-planning.component';
+import { AdminVolunteerInfoComponent } from './components/admin-volunteer-info/admin-volunteer-info.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -50,7 +55,7 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    SliderComponent, MainMenuComponent, IndexComponent, LoginComponent, SignupComponent, CabinetRunnerComponent, RunnersLastResultComponent, VolunteerLastHistoryComponent, AchievementsHistoryComponent, SubscriptionsListComponent, PlanRunComponent, PlanVolunteerComponent, UserInfoComponent
+    SliderComponent, MainMenuComponent, IndexComponent, LoginComponent, SignupComponent, CabinetRunnerComponent, RunnersLastResultComponent, VolunteerLastHistoryComponent, AchievementsHistoryComponent, SubscriptionsListComponent, PlanRunComponent, PlanVolunteerComponent, UserInfoComponent, CabinetAdminComponent, TeamInfoComponent, TeamsVolunteerPlanningComponent, AdminVolunteerInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +90,8 @@ const maskConfig: Partial<IConfig> = {
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

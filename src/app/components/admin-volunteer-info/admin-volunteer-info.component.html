@@ -1,0 +1,12 @@
+<div class="lk-services row jcsb abmb" style="margin-top: 1.5em">
+    <div class="service-block" *ngFor="let item of status | async">
+        <div class="service-block__content">
+            <p>Забег №{{item.running.number}}</p>
+            <p>Дата: {{dateToString(item.running.runningDate)}}</p>
+            <div class="percent">{{item.recruitmentPercentage}}%</div>
+        </div>
+    </div>
+    <div class="service-block">
+        <app-team-info [teamDataSource]="teamDataSource"></app-team-info>
+    </div>    
+</div>

@@ -35,11 +35,12 @@
         margin-right: 0.6em;
         background: transparent;
         transition: .25s ease;
-        > a {
+        > a, > span {
             text-decoration: none;
             text-transform: uppercase;
             color: #32302b;
             transition: .25s ease;
+            cursor: pointer;
         }
         &:hover, &.active {
             background: var(--active_color);

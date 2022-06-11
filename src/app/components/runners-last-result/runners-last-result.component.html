@@ -1,20 +1,20 @@
 <div class="abmb">
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="source; let sr">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 Результат забега
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="running-info">
-            <p><b>Забег №{{runningNumber}} {{runningDate}}</b></p>
+            <p><b>Забег №{{sr.runningNumber}} {{dateToString(sr.runningDate)}}</b></p>
             <div class="running-info__team row">
                 <div class="running-info__image">
-                    <img *ngIf="teamsId" class="img-contain" src="api/v1/team-picture/{{teamsId}}" alt="">
+                    <img class="img-contain" src="api/v1/team-picture/{{sr.teamsId}}" alt="">
                 </div>
-                <span>{{teamsName}}</span>
+                <span>{{sr.teamsName}}</span>
             </div>
-            <p>Время: {{result}}</p>
-            <p>Место: {{finishPlace}}</p>
+            <p>Время: {{secondsToTimeString(sr.result)}}</p>
+            <p>Место: {{sr.finishPlace}}</p>
         </div>
     </mat-expansion-panel>
 </div>
