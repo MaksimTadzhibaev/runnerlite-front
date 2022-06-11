@@ -1,0 +1,44 @@
+<mat-expansion-panel expanded="true" *ngFor="let item of source$ | async" class="abmb">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Забег №{{item.runningNumber}} Дата: {{dateToString(item.runningDate)}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    
+    <table mat-table [dataSource]="item.teamsVolunteerDto" class="mat-elevation-z8 table-volunteer">
+        <ng-container matColumnDef="positionName">
+            <th mat-header-cell *matHeaderCellDef>Позиция</th>
+            <td mat-cell *matCellDef="let element" class="position-td">{{element.positionName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="qty">
+            <th mat-header-cell *matHeaderCellDef>Требуется</th>
+            <td mat-cell *matCellDef="let element" class="center-td">{{element.qty}}</td>
+        </ng-container>
+        <ng-container matColumnDef="volunteers">
+            <th mat-header-cell *matHeaderCellDef>Волонтёр</th>
+            <td mat-cell *matCellDef="let element">
+                <ul>
+                    <li *ngFor="let volonteer of filterVolunteersList(element.volunteerDtoList, 1)">
+                        {{volonteer.fullName}}
+                        <button mat-button color="warn" (click)="setCondidateStatus(volonteer.id, 0)">Отменить</button>
+                    </li>
+                </ul>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="candidates">
+            <th mat-header-cell *matHeaderCellDef>Запрос на участие</th>
+            <td mat-cell *matCellDef="let element">
+                <ul>
+                    <li *ngFor="let volonteer of filterVolunteersList(element.volunteerDtoList, 0)">
+                        {{volonteer.fullName}}
+                        <button mat-button color="primary" (click)="setCondidateStatus(volonteer.id, 1)">Принять</button>
+                        <button mat-button color="warn" (click)="setCondidateStatus(volonteer.id, 2)">Отказать</button>                        
+                    </li>
+                </ul>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+</mat-expansion-panel>

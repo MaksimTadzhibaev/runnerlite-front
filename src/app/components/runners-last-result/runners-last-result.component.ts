@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CabinetService } from 'src/app/services/cabinet.service';
 import { dateToString, secondsToTimeString } from 'src/app/helpers/date.helper';
 import { Router } from '@angular/router';
 import { LOGIN_URL } from 'src/app/pages/login/login.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { RunnersLastResultDto } from 'src/app/model/runners-last-result-dto';
 
 @Component({
   selector: 'app-runners-last-result',
@@ -12,34 +13,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RunnersLastResultComponent implements OnInit {
 
-  runningNumber?:number;
-  runningDate?: string;
-  teamsName?: string;
-  result?: string;
-  finishPlace?: number;
-  teamsId?: number;
+  
+  @Input() source: RunnersLastResultDto;
 
-  constructor(
-    private service : CabinetService,
-    private router : Router,
-    private auth : AuthService 
+  constructor(    
   ) { }
 
-  ngOnInit(): void {    
-    this.service.getRunnersLastResult().subscribe(result => {
-      this.runningNumber = result.runningNumber;      
-      this.runningDate = dateToString(result.runningDate);
-      this.teamsName = result.teamsName;
-      this.result = secondsToTimeString(result.result);
-      this.finishPlace = result.finishPlace;
-      this.teamsId = result.teamsId
-    }, error => {
-      console.log(error);
-      if (error.status == 401) {
-        this.auth.logout();
-        this.router.navigateByUrl(LOGIN_URL);        
-      }
-    });
+  ngOnInit(): void {        
   }
+
+  dateToString = dateToString;
+
+  secondsToTimeString = secondsToTimeString;
 
 }

@@ -32,10 +32,8 @@ export class SubscriptionsListComponent implements OnInit {
     })
   }
 
-  ngOnDestroy() {
-    debugger;
-    if (this.subscribe) {
-      
+  ngOnDestroy() {    
+    if (this.subscribe) {      
       this.subscribe.unsubscribe();      
     }
   }

@@ -30,6 +30,14 @@ export class CabinetService {
 
   public getSubscriptions(): Observable<SubscriptionDto[]> {
     return this.http.get<SubscriptionDto[]>(URL + 'subscription/get');
-  } 
+  }
+  
+  public getRunnerCount(): Observable<number> {
+    return this.http.get<number>(URL + 'results/runnerCount');
+  }
+
+  public getVolunteerismCount(): Observable<number> {
+    return this.http.get<number>(URL + 'results/volunteerismCount');
+  }
 
 }

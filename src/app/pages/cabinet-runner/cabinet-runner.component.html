@@ -1,56 +1,34 @@
 <div class="container content__row">
     <div class="row">
         <aside class="aside">            
-            <app-user-info></app-user-info>
-            <app-runners-last-result></app-runners-last-result>
+            <app-user-info [source]="userInfoDataSource | async"></app-user-info>
+            <app-runners-last-result [source]="runnerLastResultDataSource | async"></app-runners-last-result>
             <app-volunteer-last-history [source]="volunteerHistoryDataSource | async"></app-volunteer-last-history>
             <app-achievements-history></app-achievements-history>
             <app-subscriptions-list></app-subscriptions-list>            
         </aside>
         <div class="content">
-            <div class="lk-services row jcsb" style="margin-top: 1.5em">
+
+            <div class="lk-services row jcsb abmb" style="margin-top: 1.5em">
                 <div class="service-block">
-                    <a class="nw-button nw-button--invert" href="">Планировать
-                        забег</a>
                     <div class="service-block__content">
-                        <ul>
-                            <li>Забег №21 - 23 мая</li>
-                            <li>Забег №22 - 30 мая</li>
-                        </ul>
-                    </div>
-                    <mat-calendar [dateClass]="dateClass()"></mat-calendar>
+                        <p>Количество выполненых забегов</p>                        
+                        <div class="percent">{{runnerCount | async}}</div>
+                    </div>                    
                 </div>
                 <div class="service-block">
-                    <a class="nw-button nw-button--invert" href="">Волонтёрить</a>
                     <div class="service-block__content">
-                        <p style="font-size:.8em">Забег №21 - 23 мая, требуются:</p>
-                        <ul>
-                            <li>Секундомер - 1 чел.</li>
-                            <li>Замыкающий - 1 чел.</li>
-                        </ul>
-                    </div>
-                    <mat-calendar [dateClass]="dateClass()"></mat-calendar>
+                        <p>Количество участий волонтером</p>                        
+                        <div class="percent">{{volunteerismCount | async}}</div>
+                    </div>                    
                 </div>
                 <div class="service-block">
-                    <a class="nw-button nw-button--invert" href="">Команда</a>
-                    <div class="service-block__content">
-                        <div class="running-info__team row jcsb">
-                            <span>Команда</span>
-                            <div class="running-info__image">
-                                <img class="img-contain"
-                                    src="assets/images/128.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="map-cnt">
-                        <ya-map [center]="[55.751952, 37.600739]" [zoom]="12">
-                            <ya-placemark [geometry]="[55.751952, 37.600739]"></ya-placemark>
-                        </ya-map>
-                    </div>
-                </div>
-            </div>
+                    <app-team-info [teamDataSource]="teamDataSource | async"></app-team-info>
+                </div>    
+            </div>            
             <app-plan-run></app-plan-run>
             <app-plan-volunteer></app-plan-volunteer>
+
             <div class="news row">
                 <div class="news-box col">
                     <div class="news-box__title">EVENTS</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
+import { Role } from 'src/app/model/role';
 import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-main-menu',
@@ -18,5 +19,7 @@ export class MainMenuComponent implements OnInit {
     this.auth.logout();
     this.router.navigateByUrl('/');
   }
+
+  roles = Role;
 
 }

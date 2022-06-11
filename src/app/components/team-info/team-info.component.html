@@ -1,0 +1,21 @@
+   
+<div *ngIf="teamDataSource; let tds">
+    <a class="nw-button nw-button--invert" href="">Команда</a>
+    <div class="service-block__content">
+        <div class="running-info__team row jcsb">
+            <span>{{tds.name}}</span>
+            <div class="running-info__image">
+                <img class="img-contain"
+                    src="api/v1/team-picture/{{tds.id}}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="map-cnt">
+        <ya-map
+            [center]="[tds.geoLat, tds.geoLng]"
+            [zoom]="12"
+            [state]="{ controls: ['smallMapDefaultSet'] }">
+            <ya-placemark [geometry]="[tds.geoLat, tds.geoLng]"></ya-placemark>
+        </ya-map>
+    </div>
+</div>

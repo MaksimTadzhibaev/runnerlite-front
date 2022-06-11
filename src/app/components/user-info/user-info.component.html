@@ -1,9 +1,9 @@
-<div class="profile-info row form-font abmb">
+<div class="profile-info row form-font abmb" *ngIf="source; let sr">
     <div class="profile-info__image">
-        <img class="img-contain" src="assets/images/128.png" alt="">
+        <img class="img-contain" src="api/v1/user-picture/{{sr.userId}}" alt="">
     </div>
     <div class="profile-info__name">
-        НИК или ФИО бегуна
+        {{sr.name}}
     </div>
     <a href="" class="nw-button nw-button--invert">Edit profile</a>
 </div>

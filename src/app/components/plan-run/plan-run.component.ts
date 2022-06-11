@@ -103,8 +103,15 @@ export class PlanRunComponent implements OnInit {
     return result;
   }
 
-  rowClick(teamsRunningCountId: number, statusVolunteer: number) {    
-    this.volunteerService.changeRunTableInfo(new RunTableInfo(teamsRunningCountId, statusVolunteer !== null));    
+  rowClick(teamsRunningCountId: number, statusVolunteer: number, runningStatus: string) {
+    if (this.checkRunningStatus(runningStatus)) {    
+      this.volunteerService.changeRunTableInfo(new RunTableInfo(teamsRunningCountId, statusVolunteer !== null));
+    }
+  }
+  
+
+  checkRunningStatus(runningStatus: string): boolean {
+    return runningStatus.toLowerCase().trim() == 'запланирован';
   }
 
 }

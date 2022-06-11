@@ -369,7 +369,7 @@ body {
     }
 }
 .abmb {
-    margin-bottom: 1em;
+    margin-bottom: 1em!important;
 }
 .content {
     &__row {
@@ -381,16 +381,24 @@ body {
     border-radius: 100%;
 }
 .service-block {
-    width: 31.6%;
+    width: 24%;
     box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
     &__content {
         padding: 1em 1em 0 1em;
         min-height: 3em;
+        p {
+            padding-bottom: 1em;
+        }
     }
+}
+.percent {
+    font-size: 3.3em;
+    font-weight: 600;
+    text-align: center;
 }
 .map-cnt {
     width: 100%;
-    height: 19em;
+    height: 7em;
     margin-top: 1em;
 }
 .ymaps-2-1-79-map {
@@ -407,5 +415,51 @@ body {
     cursor: pointer;
     &:hover {
         background-color: #DDD;
+    }
+}
+.table-running {
+    .mat-header-row {
+        background-color: #44b43b;
+    }
+    .position-td {
+        background-color: #80e388;
+    }
+}
+.table-volunteer {
+    .mat-header-row {
+        background-color: #ff8a20;        
+    }
+    .position-td {
+        background-color: #fdbc16;
+    }
+}
+.center-td {
+    padding-left: 1em!important;
+}
+
+div[class^=achievement-ico-] {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.achievement-ico{
+    &-1 {
+        background-image: url(assets/images/icons/ach_ico_1.png);
+    }
+    &-2 {
+        background-image: url(assets/images/icons/ach_ico_2.png);
+    }
+    &-3 {
+        background-image: url(assets/images/icons/ach_ico_3.png);
+    }
+    &-4 {
+        background-image: url(assets/images/icons/ach_ico_4.png);
+    }
+    &-5 {
+        background-image: url(assets/images/icons/ach_ico_5.png);
+    }
+    &-6 {
+        background-image: url(assets/images/icons/ach_ico_6.png);
     }
 }

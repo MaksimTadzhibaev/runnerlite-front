@@ -1,18 +1,34 @@
 <nav class="container row jcsb">
     <ul class="main-menu row">
-        <li class="main-menu__item" [ngClass]="{'active':this.router.url === '/cabinet'}"><a routerLink="/cabinet">Личный кабинет</a></li>
+        <li class="main-menu__item" *ngIf="auth.isAuthenticated()">
+            <span>Личный кабинет</span>
+            <div class="sub-menu__wrapper">
+                <ul class="sub-menu">
+                    <li class="sub-menu__item" 
+                    [ngClass]="{'active':this.router.url === '/cabinet-runner'}"
+                    *ngIf="auth.hasRole(roles.Runner)">
+                        <a routerLink="/cabinet-runner">Бегун</a>
+                    </li>
+                    <li class="sub-menu__item" 
+                    [ngClass]="{'active':this.router.url === '/cabinet-admin'}"
+                    *ngIf="auth.hasRole(roles.Admin)">
+                        <a routerLink="/cabinet-admin">Директор</a>
+                    </li>                    
+                </ul>
+            </div>
+        </li>        
         <li class="main-menu__item">
-        <a href="">About Us</a>
-        <div class="sub-menu__wrapper">
-            <ul class="sub-menu">
-            <li class="sub-menu__item"><a href="">About Club</a></li>
-            <li class="sub-menu__item"><a href="">Race Calendar</a></li>
-            <li class="sub-menu__item"><a href="">Championship</a></li>
-            <li class="sub-menu__item"><a href="">Club info</a></li>
-            <li class="sub-menu__item"><a href="">Gallery</a></li>
-            <li class="sub-menu__item"><a href="">Membership</a></li>
-            </ul>
-        </div>          
+            <a href="">About Us</a>
+            <div class="sub-menu__wrapper">
+                <ul class="sub-menu">
+                    <li class="sub-menu__item"><a href="">About Club</a></li>
+                    <li class="sub-menu__item"><a href="">Race Calendar</a></li>
+                    <li class="sub-menu__item"><a href="">Championship</a></li>
+                    <li class="sub-menu__item"><a href="">Club info</a></li>
+                    <li class="sub-menu__item"><a href="">Gallery</a></li>
+                    <li class="sub-menu__item"><a href="">Membership</a></li>
+                </ul>
+            </div>          
         </li>
         <li class="main-menu__item"><a href="">Gallery</a></li>
         <li class="main-menu__item"><a href="">Blog</a></li>
