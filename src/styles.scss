@@ -66,7 +66,15 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
-.row { display: flex; }
+.content {
+    min-width: 80%;
+}
+.row { 
+    display: flex;
+    &--column {
+        flex-direction: column;
+    }
+}
 .jcsb { justify-content: space-between; }
 .background {
     background-repeat: repeat;
@@ -153,6 +161,7 @@ body {
     @extend .background;
     @extend .border-bottom;    
     display: block;
+    width: 100%;
     box-sizing: border-box;
     position: relative;
     background-image: url(assets/images/nav-bg.jpg);
@@ -433,6 +442,21 @@ body {
         background-color: #fdbc16;
     }
 }
+.table-results {
+    .mat-header-row {
+        background-color: #229391;
+        .mat-header-cell {
+            color: #fff;
+        }
+                
+    }
+    .position-td {
+        background-color: #32c5bb;
+    }
+}
+
+
+
 .center-td {
     padding-left: 1em!important;
 }

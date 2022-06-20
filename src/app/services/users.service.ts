@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppSettings } from '../app.settings';
-import { UserNameDto } from '../model/username-dto';
+import { UserNameDto } from '../model/user-name-dto';
+
 
 const URL = AppSettings.API_ENDPOINT + 'users/';
 

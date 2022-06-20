@@ -1,4 +1,4 @@
-export class RunnersLastResultDto {
+export class RunningResultDto {
     constructor(
         public id: number,
         public runningId: number,

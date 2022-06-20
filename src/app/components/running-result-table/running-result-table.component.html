@@ -1,0 +1,41 @@
+<mat-expansion-panel *ngIf="runningDs$ | async; let running" expanded="true" class="abmb">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Забег №{{running.number}} Дата: {{dateToString(running.runningDate)}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p><button mat-button color="primary" (click)="openDialog()">Ввести результат</button></p>    
+    <table mat-table [dataSource]="tableDs$ | async" class="mat-elevation-z8 table-results">
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef>Номер места</th>
+            <td mat-cell *matCellDef="let element; let i = index" class="position-td">{{i + 1}}</td>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef>Бегун</th>
+            <td mat-cell *matCellDef="let element" class="center-td">{{element.userName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="resultString">
+            <th mat-header-cell *matHeaderCellDef>Время</th>
+            <td mat-cell *matCellDef="let element">                
+                {{element.resultString}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="buttons">
+            <th mat-header-cell *matHeaderCellDef>Редактировать</th>
+            <td mat-cell *matCellDef="let element">
+                <form *ngIf="element.isEdit" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value, element.userId)">                    
+                    <input type="text" name="time" [(ngModel)]="element.resultString">
+                    <button mat-button type="submit">Save</button>
+                </form>                
+                <button *ngIf="!element.isEdit" mat-button (click)="element.isEdit = !element.isEdit">Edit</button>                
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</mat-expansion-panel>    
+
+
+
+

@@ -30,6 +30,7 @@ import { IndexComponent } from './pages/index/index.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 //import { CustomDateAdapter } from './helpers/custom.data.adapter';
@@ -44,9 +45,17 @@ import { PlanVolunteerComponent } from './components/plan-volunteer/plan-volunte
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { CabinetAdminComponent } from './pages/cabinet-admin/cabinet-admin.component';
-import { TeamInfoComponent } from './components/team-info/team-info.component';
+import { TeamInfoComponent, DialogOverviewExampleDialog } from './components/team-info/team-info.component';
 import { TeamsVolunteerPlanningComponent } from './components/teams-volunteer-planning/teams-volunteer-planning.component';
 import { AdminVolunteerInfoComponent } from './components/admin-volunteer-info/admin-volunteer-info.component';
+import { TeamChooserComponent } from './components/team-chooser/team-chooser.component';
+import { RunningResultTableComponent } from './components/running-result-table/running-result-table.component';
+import { AddResultPopupComponent } from './components/add-result-popup/add-result-popup.component';
+import { TeamRunningCountHistoryComponent } from './components/team-running-count-history/team-running-count-history.component';
+import { RunningResultPublicComponent } from './components/running-result-public/running-result-public.component';
+import { AdminPlanRunComponent } from './components/admin-plan-run/admin-plan-run.component';
+import { AddRunningCountPopupComponent } from './components/add-running-count-popup/add-running-count-popup.component';
+
 
 
 const maskConfig: Partial<IConfig> = {
@@ -55,7 +64,7 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    SliderComponent, MainMenuComponent, IndexComponent, LoginComponent, SignupComponent, CabinetRunnerComponent, RunnersLastResultComponent, VolunteerLastHistoryComponent, AchievementsHistoryComponent, SubscriptionsListComponent, PlanRunComponent, PlanVolunteerComponent, UserInfoComponent, CabinetAdminComponent, TeamInfoComponent, TeamsVolunteerPlanningComponent, AdminVolunteerInfoComponent
+    SliderComponent, MainMenuComponent, IndexComponent, LoginComponent, SignupComponent, CabinetRunnerComponent, RunnersLastResultComponent, VolunteerLastHistoryComponent, AchievementsHistoryComponent, SubscriptionsListComponent, PlanRunComponent, PlanVolunteerComponent, UserInfoComponent, CabinetAdminComponent, TeamInfoComponent, TeamsVolunteerPlanningComponent, AdminVolunteerInfoComponent, DialogOverviewExampleDialog, TeamChooserComponent, RunningResultTableComponent, AddResultPopupComponent, TeamRunningCountHistoryComponent, RunningResultPublicComponent, AdminPlanRunComponent, AddRunningCountPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +85,8 @@ const maskConfig: Partial<IConfig> = {
     MatNativeDateModule,
     MatExpansionModule,
     MatTableModule,
-    MatMenuModule,    
+    MatMenuModule,
+    MatDialogModule,    
     NgxMaskModule.forRoot(maskConfig),
     AngularYandexMapsModule,
     HttpClientModule

@@ -1,6 +1,6 @@
    
 <div *ngIf="teamDataSource; let tds">
-    <a class="nw-button nw-button--invert" href="">Команда</a>
+    <button class="nw-button nw-button--invert" (click)="openDialog()" *ngIf="chooseTeam">Команда</button>
     <div class="service-block__content">
         <div class="running-info__team row jcsb">
             <span>{{tds.name}}</span>
@@ -9,7 +9,7 @@
                     src="api/v1/team-picture/{{tds.id}}" alt="">
             </div>
         </div>
-    </div>
+    </div>    
     <div class="map-cnt">
         <ya-map
             [center]="[tds.geoLat, tds.geoLng]"

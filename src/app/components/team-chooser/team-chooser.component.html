@@ -1,0 +1,21 @@
+<div [formGroup]="teamFormGroup" class="form-row row jcsb" [ngClass]="className">
+    <mat-form-field appearance="outline">
+        <mat-label>Город *</mat-label>
+        <mat-select formControlName="city" (selectionChange)="changeCity($event)">        
+            <mat-option *ngFor="let option of citiesDS$ | async"
+                [value]="option">
+                {{option.name}}            
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Домашняя команда *</mat-label>
+        <mat-select formControlName="team">        
+            <mat-option *ngFor="let option of teamsDS$ | async"
+                [value]="option">
+                {{option.team}}
+                <span class="mat-option-district">{{option.district}}</span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

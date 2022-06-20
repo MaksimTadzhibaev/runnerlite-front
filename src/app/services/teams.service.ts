@@ -19,7 +19,9 @@ export class TeamsService {
     });
   }
 
-  public getMyTeam(): Observable<TeamDto> {
-    return this.http.get<TeamDto>(URL + 'my');
+  public getMyTeam(teamId?: number): Observable<TeamDto> {
+    return this.http.get<TeamDto>(URL + 'my', {
+      params: teamId ? new HttpParams().set('teamId', teamId) : undefined
+    });
   }
 }

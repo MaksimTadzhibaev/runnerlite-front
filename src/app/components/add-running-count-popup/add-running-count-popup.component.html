@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Добавить забег</h1>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div mat-dialog-content>
+        <mat-form-field appearance="outline">
+            <mat-label>Номер</mat-label>
+            <input matInput formControlName="runningNumber">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="two-cntrl">
+            <mat-label>Дата</mat-label>
+            <input matInput [matDatepicker]="datepicker"
+                formControlName="runningDate">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+                <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary"
+                        matDatepickerApply>Apply</button>
+                </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button type="submit" cdkFocusInitial>Ok</button>
+    </div>
+</form>
+

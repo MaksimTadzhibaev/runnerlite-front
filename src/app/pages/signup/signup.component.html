@@ -19,39 +19,7 @@
                     <input matInput formControlName="nickName">
                 </mat-form-field>
             </div>
-            <div class="form-row row jcsb">
-                <mat-form-field appearance="outline">
-                    <mat-label>Город *</mat-label>
-                    <input type="text"
-                        placeholder="Pick one"
-                        aria-label="Город"
-                        matInput
-                        formControlName="city"
-                        [matAutocomplete]="autoCity"
-                        autocomplete="off">
-                    <mat-autocomplete autoActiveFirstOption
-                        (optionSelected)="changeCity($event)"
-                        [displayWith]="displayCity"
-                        #autoCity="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredCities |
-                            async"
-                            [value]="option">
-                            {{option.name}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Домашняя команда *</mat-label>
-                    <mat-select formControlName="team">
-                        <mat-select-trigger>{{signupForm.value.team.team}}</mat-select-trigger>
-                        <mat-option *ngFor="let option of teamsList"
-                            [value]="option">
-                            {{option.team}}
-                            <span class="mat-option-district">{{option.district}}</span>
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+            <app-team-chooser [teamFormGroup]="signupForm.get('team')"></app-team-chooser>
             <div class="form-row row jcsb">
                 <mat-form-field appearance="outline" class="two-cntrl">
                     <mat-label>Телефон *</mat-label>
