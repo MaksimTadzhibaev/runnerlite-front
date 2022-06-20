@@ -1,0 +1,24 @@
+<div *ngIf="source; let src">
+    <div style="margin: 1em 0;">
+        <p>Забег: {{src.runningNumber}}</p>
+        <p>Дата забега: {{dateToString(src.runningDate)}}</p>
+        <p>Количество участников: {{src.runnersCount}}</p>
+    </div>    
+    <table mat-table [dataSource]="src.tourneyTableDto" class="table-results">
+        <ng-container matColumnDef="finishPlace">
+            <th mat-header-cell *matHeaderCellDef>Место</th>
+            <td mat-cell *matCellDef="let element">{{element.finishPlace}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Участник забега</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="resultString">
+            <th mat-header-cell *matHeaderCellDef>Время</th>
+            <td mat-cell *matCellDef="let element">{{element.resultString}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

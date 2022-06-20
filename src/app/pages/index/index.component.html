@@ -1,6 +1,22 @@
 <div class="container content">
-  <app-slider></app-slider>
-  <div class="service row ptb">
+  <div class="lk-services row jcsb abmb" style="margin-top: 1.5em">
+    <div class="service-block">
+      <app-team-info 
+        [teamDataSource]="teamDataSource | async" 
+        [chooseTeam]="true" 
+        (onChanged)="changedTeam($event)">
+      </app-team-info>
+    </div>    
+  </div>
+  <app-team-running-count-history 
+    [source]="teamRunningCountHistoryDS | async"
+    (onChanged)="changedRunningCount($event)">
+  </app-team-running-count-history>
+  <app-running-result-public [source]="runningResultDS | async">
+    
+  </app-running-result-public>
+  <!--app-slider></app-slider-->
+  <!--div class="service row ptb">
     <div class="service-box col background border-bottom background--dark-brown border-bottom--dark-brown">
       <div class="service-box__title">CALENDAR</div>
       <p class="text">VESTIBULUM LIBERO NISL PORTA VEL PRAESENT VESTIBULUM MOLESTIE LACUS. AENEAN NONUMMY HENDRERIT MAURIS. PHASELLUS PORTA. FUSCE ST.</p>
@@ -16,8 +32,8 @@
       <p class="text">VESTIBULUM IACULIS LACINIA ESTPROIN DICTUM PRAESENT VESTIBULUM MOLESTIE LACUS. AENEAN NONUMMY HENDRERIT MAURIS. PHASELLUS PORTA. FUSCE SUS.</p>
       <a href="" class="sr-button sr-button--yellow">Read More</a>
     </div>
-  </div>
-  <div class="news row">
+  </div-->
+  <!--div class="news row">
     <div class="news-box col">
       <div class="news-box__title">EVENTS</div>
       <div class="news-box__image">
@@ -48,5 +64,5 @@
         HENDRERIT MAURIS. PHASELLUS PORTA. FUSCE ST VARIUS MI. CUM SOCIIS NATOQUE PENATIBUS ET MAG.</p>
       <a class="nw-button" href="">Read More</a>
     </div>
-  </div>
+  </div-->
 </div>

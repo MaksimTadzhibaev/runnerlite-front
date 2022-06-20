@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserNameDto } from 'src/app/model/username-dto';
+import { UserNameDto } from 'src/app/model/user-name-dto';
+
 
 @Component({
   selector: 'app-user-info',

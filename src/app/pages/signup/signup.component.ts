@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { ConfirmedValidator } from 'src/app/helpers/confirmed.validator';
-import { CitiesDto } from 'src/app/model/cities-dto';
 import { SignupDto } from 'src/app/model/signup-dto';
-
-import { TeamWithDistrDto } from 'src/app/model/team-with-distr-dto';
 import { AuthService } from 'src/app/services/auth.service';
-import { CitiesService } from 'src/app/services/cities.service';
-import { TeamsService } from 'src/app/services/teams.service';
 import { LOGIN_URL } from '../login/login.component';
 
 export const SIGNUP_URL = 'signup';
@@ -22,25 +15,15 @@ export const SIGNUP_URL = 'signup';
 })
 export class SignupComponent implements OnInit {
 
-  signupForm!: FormGroup;
-  cities: CitiesDto[] = [];
-  filteredCities!: Observable<CitiesDto[]>;
-  teamsList: TeamWithDistrDto[] = [];
+  signupForm: any;  
 
   constructor(    
-    private formBuilder: FormBuilder,
-    private citiesService: CitiesService,
-    private teamsService: TeamsService,
+    private formBuilder: FormBuilder,    
     private authService: AuthService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.initForm();
-    this.citiesService.findAll().subscribe(c => {
-      this.cities = c;
-    }, error => {
-      console.log(error);
-    });
+    this.initForm();    
   }
 
   initForm() {
@@ -54,12 +37,14 @@ export class SignupComponent implements OnInit {
         Validators.minLength(3)
       ]],
       nickName: [],
-      city: ['', [
-        Validators.required
-      ]],
-      team: ['', [
-        Validators.required
-      ]],
+      team: this.formBuilder.group({
+        city: ['', [
+          Validators.required
+        ]],
+        team: ['', [
+          Validators.required
+        ]]
+      }),      
       phone: ['', [
         Validators.required,
         Validators.minLength(10)
@@ -78,31 +63,8 @@ export class SignupComponent implements OnInit {
       ]]
     }, {
       validator: ConfirmedValidator('password', 'rePass')
-    });
-    this.filteredCities = this.signupForm.controls['city'].valueChanges.pipe(
-      startWith(''),
-      map(value => (typeof value === 'string' ? value : value.name)),
-      map(value => this.filterCities(value))
-    );
-  }
-
-  filterCities(value: string): CitiesDto[] {
-    const filterValue = value.toLowerCase();
-    return this.cities.filter(city => city.name.toLowerCase().includes(filterValue));
-  }
-
-  displayCity(city: CitiesDto) {
-    return city && city.name ? city.name : '';
-  }
-
-  changeCity(e: any) {
-    this.teamsService.getByCityId(e.option.value.id).subscribe(t => {      
-      this.teamsList = t;
-      this.signupForm.controls['team'].setValue('');
-    }, error => {
-      console.log(error);
-    });
-  }
+    });    
+  }  
 
   isControlInvalid(controlName: string): boolean {
     const control = this.signupForm.controls[controlName];
@@ -110,14 +72,21 @@ export class SignupComponent implements OnInit {
     return result;
   }
 
-  onSubmit() {
-    const controls = this.signupForm.controls;
-    /** Проверяем форму на валидность */
+  touched(fg: FormGroup) {
+    const controls = fg.controls;
+    Object.keys(controls)
+        .forEach(controlName => {
+          if (controls[controlName] instanceof FormGroup) {
+            this.touched(controls[controlName] as FormGroup);
+          } else {
+            controls[controlName].markAsTouched()
+          }
+        });    
+  }
+
+  onSubmit() : void {   
     if (this.signupForm.invalid) {
-      /** Если форма не валидна, то помечаем все контролы как touched*/
-      Object.keys(controls)
-        .forEach(controlName => controls[controlName].markAsTouched());
-      /** Прерываем выполнение метода*/
+      this.touched(this.signupForm);
       return;
     }    
     let signup = new SignupDto(
@@ -129,7 +98,7 @@ export class SignupComponent implements OnInit {
       this.signupForm.value.phone,
       true,
       false,
-      this.signupForm.value.team.id,
+      this.signupForm.value.team.team.id,
       this.signupForm.value.birthday,
       this.signupForm.value.sex
     );

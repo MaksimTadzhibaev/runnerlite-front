@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Выбор команды</h1>
+<div mat-dialog-content>  
+  <app-team-chooser [teamFormGroup]="teamForm" [className]="'row--column'"></app-team-chooser>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="teamForm.controls['team'].value" cdkFocusInitial>Ok</button>
+</div>

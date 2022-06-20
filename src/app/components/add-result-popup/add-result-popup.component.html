@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Ввод результата забега</h1>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <div mat-dialog-content>
+        <div class="result-form row">
+            <mat-form-field appearance="outline">
+                <mat-label>Бегун</mat-label>
+                <mat-select formControlName="runner">        
+                    <mat-option *ngFor="let option of runersDs$ | async"
+                        [value]="option">
+                        {{option.name}}            
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="result-form__separator">-</span>
+            <mat-form-field appearance="outline" class="result-form__timeinp">
+                <mat-label>Часы</mat-label>
+                <mat-select formControlName="hours">        
+                    <mat-option *ngFor="let option of hoursDs"
+                        [value]="option">
+                        {{option}}            
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="result-form__separator">:</span>
+            <mat-form-field appearance="outline" class="result-form__timeinp">
+                <mat-label>Минуты</mat-label>
+                <mat-select formControlName="minutes">        
+                    <mat-option *ngFor="let option of minutesDs"
+                        [value]="option">
+                        {{option}}            
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="result-form__separator">:</span>
+            <mat-form-field appearance="outline" class="result-form__timeinp">
+                <mat-label>Секунды</mat-label>
+                <mat-select formControlName="seconds">        
+                    <mat-option *ngFor="let option of secondsDs"
+                        [value]="option">
+                        {{option}}            
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>    
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button type="submit" cdkFocusInitial>Ok</button>
+    </div>
+</form> 

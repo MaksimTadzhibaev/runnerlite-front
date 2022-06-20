@@ -1,7 +1,8 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TeamDto } from 'src/app/model/team-dto';
-import { UserNameDto } from 'src/app/model/username-dto';
+import { UserNameDto } from 'src/app/model/user-name-dto';
+
 import { TeamsService } from 'src/app/services/teams.service';
 import { UsersService } from 'src/app/services/users.service';
 
