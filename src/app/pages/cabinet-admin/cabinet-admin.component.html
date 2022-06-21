@@ -2,7 +2,7 @@
     <div class="row">
         <aside class="aside">            
             <app-user-info [source]="userInfoDataSource | async"></app-user-info>
-            
+            <app-volunteer-template></app-volunteer-template>
         </aside>
         <div class="content">
             <app-admin-volunteer-info [teamDataSource]="teamDataSource | async"></app-admin-volunteer-info>

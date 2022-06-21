@@ -55,6 +55,7 @@ import { TeamRunningCountHistoryComponent } from './components/team-running-coun
 import { RunningResultPublicComponent } from './components/running-result-public/running-result-public.component';
 import { AdminPlanRunComponent } from './components/admin-plan-run/admin-plan-run.component';
 import { AddRunningCountPopupComponent } from './components/add-running-count-popup/add-running-count-popup.component';
+import { VolunteerTemplateComponent } from './components/volunteer-template/volunteer-template.component';
 
 
 
@@ -64,7 +65,7 @@ const maskConfig: Partial<IConfig> = {
 @NgModule({
   declarations: [
     AppComponent,
-    SliderComponent, MainMenuComponent, IndexComponent, LoginComponent, SignupComponent, CabinetRunnerComponent, RunnersLastResultComponent, VolunteerLastHistoryComponent, AchievementsHistoryComponent, SubscriptionsListComponent, PlanRunComponent, PlanVolunteerComponent, UserInfoComponent, CabinetAdminComponent, TeamInfoComponent, TeamsVolunteerPlanningComponent, AdminVolunteerInfoComponent, DialogOverviewExampleDialog, TeamChooserComponent, RunningResultTableComponent, AddResultPopupComponent, TeamRunningCountHistoryComponent, RunningResultPublicComponent, AdminPlanRunComponent, AddRunningCountPopupComponent
+    SliderComponent, MainMenuComponent, IndexComponent, LoginComponent, SignupComponent, CabinetRunnerComponent, RunnersLastResultComponent, VolunteerLastHistoryComponent, AchievementsHistoryComponent, SubscriptionsListComponent, PlanRunComponent, PlanVolunteerComponent, UserInfoComponent, CabinetAdminComponent, TeamInfoComponent, TeamsVolunteerPlanningComponent, AdminVolunteerInfoComponent, DialogOverviewExampleDialog, TeamChooserComponent, RunningResultTableComponent, AddResultPopupComponent, TeamRunningCountHistoryComponent, RunningResultPublicComponent, AdminPlanRunComponent, AddRunningCountPopupComponent, VolunteerTemplateComponent
   ],
   imports: [
     BrowserModule,
