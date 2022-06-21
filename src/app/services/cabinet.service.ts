@@ -5,7 +5,7 @@ import { AppSettings } from '../app.settings';
 import { AchievementsDto } from '../model/achievements-dto';
 
 import { SubscriptionDto } from '../model/subscription-dto';
-import { VolunteerLastHistoryDto } from '../model/volunteer-last-history-dto';
+
 
 const URL = AppSettings.API_ENDPOINT;
 
@@ -17,9 +17,7 @@ export class CabinetService {
   constructor(public http: HttpClient) { }
   
 
-  public getVolunteerLastHistory(): Observable<VolunteerLastHistoryDto> {
-    return this.http.get<VolunteerLastHistoryDto>(URL + 'volunteer/lastHistory');
-  }
+  
 
   public getAchievements(): Observable<AchievementsDto[]> {
     return this.http.get<AchievementsDto[]>(URL + 'achievements/get');

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { dateToString } from 'src/app/helpers/date.helper';
+import { VolunteerDto } from 'src/app/model/volunteer-dto';
 
-import { VolunteerLastHistoryDto } from 'src/app/model/volunteer-last-history-dto';
+
 
 @Component({
   selector: 'app-volunteer-last-history',
@@ -9,7 +11,7 @@ import { VolunteerLastHistoryDto } from 'src/app/model/volunteer-last-history-dt
 })
 export class VolunteerLastHistoryComponent implements OnInit {
 
-  @Input() source: VolunteerLastHistoryDto;
+  @Input() source: VolunteerDto;
 
   constructor(    
   ) { }  
@@ -17,4 +19,5 @@ export class VolunteerLastHistoryComponent implements OnInit {
   ngOnInit(): void {    
   }
 
+  dateToString = dateToString;
 }

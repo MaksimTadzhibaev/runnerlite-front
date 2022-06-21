@@ -6,7 +6,7 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="running-info" *ngIf="source; let sr">
-            <p><b>Забег №{{sr.runningNumber}} {{sr.runningDate}}</b></p>
+            <p><b>Забег №{{sr.runningNumber}} {{dateToString(sr.runningDate)}}</b></p>
             <p><b>{{sr.positionName}}</b></p>
             <div class="running-info__team row">
                 <div class="running-info__image">
